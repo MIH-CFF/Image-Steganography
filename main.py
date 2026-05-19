@@ -1,0 +1,191 @@
+import math
+import zlib
+import numpy as np
+from PIL import Image
+from bitarray import bitarray
+
+def flip_bits(data: bytes) -> bytes:
+    return bytes(b ^ 0xFF for b in data)
+
+def rotate_bytes(data: bytes, shift: int = 3) -> bytes:
+    shift %= len(data) if data else 1
+    return data[shift:] + data[:shift]
+
+def unrotate_bytes(data: bytes, shift: int = 3) -> bytes:
+    shift %= len(data) if data else 1
+    return data[-shift:] + data[:-shift]
+
+def compress_file(filepath: str) -> bitarray:
+    with open(filepath, "rb") as f:
+        data = f.read()
+    data = flip_bits(data)
+    data = rotate_bytes(data)
+    packed = zlib.compress(data, level=9)
+    # print(packed)
+    final_bits = bitarray()
+    final_bits.frombytes(packed)
+    return final_bits
+
+def decompress_bits(encoded_bits: bitarray) -> str:
+    packed = encoded_bits.tobytes()
+    data = zlib.decompress(packed)
+    data = unrotate_bytes(data)
+    data = flip_bits(data)
+    return data.decode("utf-8")
+
+def generate_circular_path_cells(h, w, step=1):
+    cx = h // 2
+    cy = w // 2
+    max_radius = min(h // 2, w // 2)
+    mask = np.zeros((h, w), dtype=bool)
+    r = step
+    while r <= max_radius:
+        samples = max(360, int(2 * math.pi * r * 8))
+        for i in range(samples):
+            theta = 2 * math.pi * i / samples
+            x = round(cx + r * math.cos(theta))
+            y = round(cy + r * math.sin(theta))
+            if 0 <= x < h and 0 <= y < w:
+                mask[x, y] = True
+        r += step
+    return mask
+
+def calculate_max_capacity(h, w, circular_mask, reserved_pixels):
+    total_bits = 0
+    for x in range(h):
+        for y in range(w):
+            if x == h-1 and y >= (w - reserved_pixels):
+                continue
+            if circular_mask[x, y]:
+                total_bits += 3 * 2
+            else:
+                total_bits += 3 * 1
+    return total_bits
+
+def encode_image(image_path, text_path, output_path):
+    img = Image.open(image_path).convert("RGB")
+    arr = np.array(img, dtype=np.uint8)
+    h, w, _ = arr.shape
+    circular_mask = generate_circular_path_cells(h, w)
+    bits = compress_file(text_path)
+    payload = bits.to01()
+    total_len = len(payload)
+    is_large = (h >= 1024 or w >= 1024)
+    reserved_pixels = 2 if is_large else 1
+    
+    max_capacity = calculate_max_capacity(h, w, circular_mask, reserved_pixels)
+    if total_len > max_capacity:
+        raise ValueError(
+            f"\n[ERROR] Payload size exceeds image capacity!\n"
+            f"Required Payload: {total_len} bits\n"
+            f"Image Max Capacity: {max_capacity} bits\n"
+            f"Shortfall: {total_len - max_capacity} bits. Use a larger image or less text."
+        )
+    
+    stream = payload
+    bit_idx = 0
+    
+    for x in range(h):
+        for y in range(w):
+            if x == h - 1 and y >= (w - reserved_pixels):
+                continue  
+            for c in range(3):
+                if bit_idx >= total_len:
+                    break
+                value = int(arr[x, y, c])
+                if circular_mask[x, y]:
+                    if bit_idx + 2 <= total_len:
+                        bits_chunk = stream[bit_idx:bit_idx + 2]
+                        arr[x, y, c] = (value & 0b11111100) | int(bits_chunk, 2)
+                        bit_idx += 2
+                    else:
+                        bits_chunk = stream[bit_idx]
+                        arr[x, y, c] = (value & 0b11111110) | int(bits_chunk)
+                        bit_idx += 1
+                else:
+                    bits_chunk = stream[bit_idx]
+                    arr[x, y, c] = (value & 0b11111110) | int(bits_chunk)
+                    bit_idx += 1
+            if bit_idx >= total_len:
+                break
+        if bit_idx >= total_len:
+            break
+            
+    if not is_large:
+        length24bit = total_len & 0xFFFFFF
+        arr[h-1, w-1, 0] = (length24bit >> 16) & 0xFF
+        arr[h-1, w-1, 1] = (length24bit >> 8) & 0xFF
+        arr[h-1, w-1, 2] = length24bit & 0xFF
+    else:
+        length48bit = total_len & 0xFFFFFFFFFFFF
+        arr[h-1, w-2, 0] = (length48bit >> 40) & 0xFF
+        arr[h-1, w-2, 1] = (length48bit >> 32) & 0xFF
+        arr[h-1, w-2, 2] = (length48bit >> 24) & 0xFF
+        arr[h-1, w-1, 0] = (length48bit >> 16) & 0xFF
+        arr[h-1, w-1, 1] = (length48bit >> 8) & 0xFF
+        arr[h-1, w-1, 2] = length48bit & 0xFF 
+    img = Image.fromarray(arr)
+    img.save(output_path, format="PNG", compress_level=0)
+    # print(f"Success! Embedded {total_len} bits safely. Capacity utilized: {(total_len / max_capacity) * 100:.2f}%")
+
+def decode_image(image_path):
+    img = Image.open(image_path).convert("RGB")
+    arr = np.array(img, dtype=np.uint8)
+    h, w, _ = arr.shape
+    circular_mask = generate_circular_path_cells(h, w)
+    is_large = (h >= 1024 or w >= 1024)
+    reserved_pixels = 2 if is_large else 1
+    
+    if not is_large:
+        r = int(arr[h - 1, w - 1, 0])
+        g = int(arr[h - 1, w - 1, 1])
+        b = int(arr[h - 1, w - 1, 2])
+        total_size = (r << 16) | (g << 8) | b
+    else:
+        p1_r = int(arr[h - 1, w - 2, 0])
+        p1_g = int(arr[h - 1, w - 2, 1])
+        p1_b = int(arr[h - 1, w - 2, 2])
+        p2_r = int(arr[h - 1, w - 1, 0])
+        p2_g = int(arr[h - 1, w - 1, 1])
+        p2_b = int(arr[h - 1, w - 1, 2])
+        total_size = (p1_r << 40) | (p1_g << 32) | (p1_b << 24) | (p2_r << 16) | (p2_g << 8) | p2_b
+        
+    extracted_list = []
+    current_bits_count = 0
+    for x in range(h):
+        for y in range(w):
+            if x == h - 1 and y >= (w - reserved_pixels):
+                continue
+            for c in range(3):
+                if current_bits_count >= total_size:
+                    break
+                value = int(arr[x, y, c])
+                remaining_bits = total_size - current_bits_count
+                if circular_mask[x, y]:
+                    if remaining_bits == 1:
+                        bits_str = format(value & 0b1, "01b")
+                        current_bits_count += 1
+                    else:
+                        bits_str = format(value & 0b11, "02b")
+                        current_bits_count += 2
+                else:
+                    bits_str = format(value & 0b1, "01b")
+                    current_bits_count += 1
+                extracted_list.append(bits_str)
+            if current_bits_count >= total_size:
+                break
+        if current_bits_count >= total_size:
+            break
+            
+    extracted = "".join(extracted_list)[:total_size]
+    bits = bitarray(extracted)
+    return decompress_bits(bits)
+
+if __name__ == "__main__":
+    try:
+        encode_image("abstract512.png", "input.txt", "encoded.png")
+        recovered = decode_image("encoded.png")
+        print("Decoded Output:")
+        print(recovered)
+    except ValueError as e:
+        print(e)
