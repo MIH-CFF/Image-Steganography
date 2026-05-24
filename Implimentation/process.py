@@ -15,9 +15,7 @@ def unrotate_bytes(data: bytes, shift: int = 3) -> bytes:
     shift %= len(data) if data else 1
     return data[-shift:] + data[:-shift]
 
-def compress_file(filepath: str) -> bitarray:
-    with open(filepath, "rb") as f:
-        data = f.read()
+def compress_file(data: bytes) -> bitarray:
     data = flip_bits(data)
     data = rotate_bytes(data)
     packed = zlib.compress(data, level=9)
@@ -33,11 +31,11 @@ def decompress_bits(encoded_bits: bitarray) -> str:
     data = flip_bits(data)
     return data.decode("utf-8")
 
-def generate_circular_path_cells(h, w, step=1):
+def circle_cells(h, w, step=1):
     cx = h // 2
     cy = w // 2
     max_radius = min(h // 2, w // 2)
-    mask = np.zeros((h, w), dtype=bool)
+    pixel_set = set()
     r = step
     while r <= max_radius:
         samples = max(360, int(2 * math.pi * r * 8))
@@ -46,34 +44,34 @@ def generate_circular_path_cells(h, w, step=1):
             x = round(cx + r * math.cos(theta))
             y = round(cy + r * math.sin(theta))
             if 0 <= x < h and 0 <= y < w:
-                mask[x, y] = True
+                pixel_set.add((x, y))
         r += step
-    return mask
+    return pixel_set
 
-def calculate_max_capacity(h, w, circular_mask, reserved_pixels):
+def calculate_max_capacity(h, w, circular_set, reserved_pixels):
     total_bits = 0
     for x in range(h):
         for y in range(w):
             if x == h-1 and y >= (w - reserved_pixels):
                 continue
-            if circular_mask[x, y]:
+            if (x,y) in circular_set:
                 total_bits += 3 * 2
             else:
                 total_bits += 3 * 1
     return total_bits
 
-def encode_image(image_path, text_path, output_path):
+def encode_image(image_path, text):
     img = Image.open(image_path).convert("RGB")
     arr = np.array(img, dtype=np.uint8)
     h, w, _ = arr.shape
-    circular_mask = generate_circular_path_cells(h, w)
-    bits = compress_file(text_path)
+    circular_set= circle_cells(h, w, 5)
+    bits = compress_file(text)
     payload = bits.to01()
     total_len = len(payload)
     is_large = (h >= 1024 or w >= 1024)
     reserved_pixels = 2 if is_large else 1
     
-    max_capacity = calculate_max_capacity(h, w, circular_mask, reserved_pixels)
+    max_capacity = calculate_max_capacity(h, w, circular_set, reserved_pixels)
     if total_len > max_capacity:
         raise ValueError(
             f"\n[ERROR] Payload size exceeds image capacity!\n"
@@ -93,7 +91,7 @@ def encode_image(image_path, text_path, output_path):
                 if bit_idx >= total_len:
                     break
                 value = int(arr[x, y, c])
-                if circular_mask[x, y]:
+                if (x,y) in circular_set:
                     if bit_idx + 2 <= total_len:
                         bits_chunk = stream[bit_idx:bit_idx + 2]
                         arr[x, y, c] = (value & 0b11111100) | int(bits_chunk, 2)
@@ -125,14 +123,15 @@ def encode_image(image_path, text_path, output_path):
         arr[h-1, w-1, 1] = (length48bit >> 8) & 0xFF
         arr[h-1, w-1, 2] = length48bit & 0xFF 
     img = Image.fromarray(arr)
-    img.save(output_path, format="PNG", compress_level=0)
+    return img
+    # img.save(output_path, format="PNG", compress_level=0)
     # print(f"Success! Embedded {total_len} bits safely. Capacity utilized: {(total_len / max_capacity) * 100:.2f}%")
 
 def decode_image(image_path):
     img = Image.open(image_path).convert("RGB")
     arr = np.array(img, dtype=np.uint8)
     h, w, _ = arr.shape
-    circular_mask = generate_circular_path_cells(h, w)
+    circular_set = circle_cells(h, w, 5)
     is_large = (h >= 1024 or w >= 1024)
     reserved_pixels = 2 if is_large else 1
     
@@ -161,7 +160,7 @@ def decode_image(image_path):
                     break
                 value = int(arr[x, y, c])
                 remaining_bits = total_size - current_bits_count
-                if circular_mask[x, y]:
+                if (x,y) in circular_set:
                     if remaining_bits == 1:
                         bits_str = format(value & 0b1, "01b")
                         current_bits_count += 1
@@ -183,7 +182,7 @@ def decode_image(image_path):
 
 if __name__ == "__main__":
     try:
-        encode_image("abstract512.png", "input.txt", "encoded.png")
+        encode_image("images//abstract512.png", "input.txt", "encoded.png")
         recovered = decode_image("encoded.png")
         print("Decoded Output:")
         print(recovered)
