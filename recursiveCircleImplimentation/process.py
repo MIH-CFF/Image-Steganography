@@ -39,24 +39,32 @@ def decompress_bits(encoded_bits: bitarray) -> str:
     data = flip_bits(data)
     return data.decode("utf-8")
 
-def circle_cells(h, w, step=1):
+circular_set = set()
+def circle_cells(h, w, dis, offset_x=0, offset_y=0):
+    max_radius = min(h // 2, w // 2)
+    if dis >= max_radius or h <= 0 or w <= 0:
+        return
     cx = h // 2
     cy = w // 2
-    max_radius = min(h // 2, w // 2)
-    pixel_set = set()
-    r = step
-    while r <= max_radius:
-        samples = max(360, int(2 * math.pi * r * 8))
-        for i in range(samples):
-            theta = 2 * math.pi * i / samples
-            x = round(cx + r * math.cos(theta))
-            y = round(cy + r * math.sin(theta))
-            if 0 <= x < h and 0 <= y < w:
-                pixel_set.add((x, y))
-        r += step
-    return pixel_set
+    r = max_radius - dis
+    if r <= 0:
+        return
+    samples = max(360, int(2 * math.pi * r * 8))
+    for i in range(samples):
+        theta = 2 * math.pi * i / samples
+        x = round(cx + r * math.cos(theta)) + offset_x
+        y = round(cy + r * math.sin(theta)) + offset_y
+        circular_set.add((x, y))
+    left_w = w // 2
+    right_w = w - left_w
+    top_h = h // 2
+    bottom_h = h - top_h
+    circle_cells(top_h, left_w, dis, offset_x, offset_y)
+    circle_cells(top_h, right_w, dis, offset_x, offset_y + left_w)
+    circle_cells(bottom_h, left_w, dis, offset_x + top_h, offset_y)
+    circle_cells(bottom_h, right_w, dis, offset_x + top_h, offset_y + left_w)
 
-def calculate_max_capacity(h, w, circular_set, reserved_pixels):
+def calculate_max_capacity(h, w, reserved_pixels):
     total_bits = 0
     for x in range(h):
         for y in range(w):
@@ -67,21 +75,29 @@ def calculate_max_capacity(h, w, circular_set, reserved_pixels):
             else:
                 total_bits += 3 * 1
     return total_bits
-
+def genBinImage(w,h):
+    img = Image.new("1", (w, h), 0)
+    for x, y in circular_set:
+        if 0 <= x < h and 0 <= y < w:
+            img.putpixel((y, x), 1)
+    img.save("circles.png")
 def encode_image(image_path, text):
     img = Image.open(image_path).convert("RGB")
     arr = np.array(img, dtype=np.uint8)
     h, w, _ = arr.shape
-    circular_distance = avg_kth_msb(img,3) + 3 
+    circular_distance = avg_kth_msb(img,4) + 1 
+    circular_set.clear()
     print(circular_distance)
-    circular_set= circle_cells(h, w, circular_distance)
+    circular_set.clear()
+    circle_cells(h, w, circular_distance)
+    genBinImage(h,w)
     bits = compress_file(text)
     payload = bits.to01()
     total_len = len(payload)
     is_large = (h >= 1024 or w >= 1024)
     reserved_pixels = 2 if is_large else 1
     
-    max_capacity = calculate_max_capacity(h, w, circular_set, reserved_pixels)
+    max_capacity = calculate_max_capacity(h, w,reserved_pixels)
     if total_len > max_capacity:
         raise ValueError(
             f"\n[ERROR] Payload size exceeds image capacity!\n"
@@ -141,8 +157,9 @@ def decode_image(image_path):
     img = Image.open(image_path).convert("RGB")
     arr = np.array(img, dtype=np.uint8)
     h, w, _ = arr.shape
-    circular_distance = avg_kth_msb(img,3) + 3
-    circular_set = circle_cells(h, w, circular_distance)
+    circular_distance = avg_kth_msb(img,4) + 1
+    circular_set.clear()
+    circle_cells(h, w, circular_distance)
     is_large = (h >= 1024 or w >= 1024)
     reserved_pixels = 2 if is_large else 1
     
