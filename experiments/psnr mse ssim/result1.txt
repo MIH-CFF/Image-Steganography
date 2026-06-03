@@ -1,0 +1,198 @@
+Image   Text Size   MSE  PSNR     SSIM
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.32476806640625), np.float64(53.01507041238924), np.float64(0.9999681129169403)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.3199361165364583), np.float64(53.08017091940009), np.float64(0.9999709053245237)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.420806884765625), np.float64(51.889975242296885), np.float64(0.9999564693574654)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.07862472534179688), np.float64(59.17521219524288), np.float64(0.9999992198907693)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.07890955607096355), np.float64(59.159507607309465), np.float64(0.9999971197446745)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.10538736979166667), np.float64(57.90291795138076), np.float64(0.9999966097679321)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.03904088338216146), np.float64(62.21560724935303), np.float64(0.9999989215579418)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.03401756286621094), np.float64(62.8137716480918), np.float64(0.9999976322069997)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_1KB.txt', np.float64(0.021394093831380207), np.float64(64.8278646464322), np.float64(0.9999987661175758)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.3588155110677083), np.float64(52.582091521772654), np.float64(0.9999549676006133)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.014119466145833334), np.float64(66.63262084428455), np.float64(0.9999665183755413)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.4518686930338542), np.float64(51.580681078607505), np.float64(0.9999439934860369)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.0031674702962239585), np.float64(73.12367810002728), np.float64(0.9999998080708016)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.031153361002604168), np.float64(63.19575453174701), np.float64(0.9999968836780596)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.1213213602701823), np.float64(57.291430898382345), np.float64(0.9999959960080709)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.024481773376464844), np.float64(64.24237487438579), np.float64(0.9999991595783807)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.031296730041503906), np.float64(63.17581397095179), np.float64(0.9999974077647645)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_10KB.txt', np.float64(0.020170847574869793), np.float64(65.08356213306848), np.float64(0.9999987833679901)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.4030303955078125), np.float64(52.077425601274776), np.float64(0.9999404015054668)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.010142008463541666), np.float64(68.06956392235635), np.float64(0.9999585143656952)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.4947662353515625), np.float64(51.186803067354916), np.float64(0.999933262662139)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.0023600260416666665), np.float64(74.40163565656391), np.float64(0.9999997734667566)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.034093221028645836), np.float64(62.80412326817546), np.float64(0.9999952835874962)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.13338088989257812), np.float64(56.87986750243314), np.float64(0.9999950729735142)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.024875640869140625), np.float64(64.17306082612113), np.float64(0.9999991118495885)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.03335698445638021), np.float64(62.898935782891726), np.float64(0.9999970720598945)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_20KB.txt', np.float64(0.02247301737467448), np.float64(64.61418973308879), np.float64(0.9999987248864685)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.2776590983072917), np.float64(53.6956845190531), np.float64(0.9999318775861687)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.154815673828125), np.float64(56.23265433510224), np.float64(0.9999466011906261)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.37109375), np.float64(52.435967208909126), np.float64(0.999925179329281)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.037762959798177086), np.float64(62.360143346264174), np.float64(0.9999993592271844)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.04692840576171875), np.float64(61.41644560131843), np.float64(0.9999944636412552)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.09594472249348958), np.float64(58.310592698109154), np.float64(0.9999954306676447)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.030235926310221355), np.float64(63.325570826421625), np.float64(0.9999989105978465)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.029422442118326824), np.float64(63.444016437171726), np.float64(0.9999968429298912)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_30KB.txt', np.float64(0.01733843485514323), np.float64(65.74070469830004), np.float64(0.9999986687428448)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.2896626790364583), np.float64(53.51187817796153), np.float64(0.9999152576081917)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.0678558349609375), np.float64(59.81493162042675), np.float64(0.9999387727442285)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.3811543782552083), np.float64(52.3197944806671), np.float64(0.9999126066904013)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.016239166259765625), np.float64(66.02516632642435), np.float64(0.9999995426606251)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.033284505208333336), np.float64(62.908382555480046), np.float64(0.9999938261903066)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.10096104939778645), np.float64(58.08926504850384), np.float64(0.9999948189600069)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.026091257731119793), np.float64(63.96585346063611), np.float64(0.9999989409738296)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.02872498830159505), np.float64(63.548205003762995), np.float64(0.9999967971056947)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_40KB.txt', np.float64(0.017096837361653645), np.float64(65.80164580499931), np.float64(0.9999986704003406)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.3529764811197917), np.float64(52.65334591627883), np.float64(0.9998997986025824)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.019297281901041668), np.float64(65.27584219658628), np.float64(0.9999238203255393)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.443359375), np.float64(51.663244646506186), np.float64(0.9998944321872419)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.004477183024088542), np.float64(71.6207551246905), np.float64(0.9999996091164634)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.030534108479817707), np.float64(63.2829511667187), np.float64(0.9999926629407808)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.11931228637695312), np.float64(57.36395192713351), np.float64(0.9999933928148922)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.024570147196451824), np.float64(64.22672602580124), np.float64(0.9999989639183012)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.031076431274414062), np.float64(63.20649220971263), np.float64(0.9999966974575155)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_50KB.txt', np.float64(0.019995371500651043), np.float64(65.12150883421927), np.float64(0.9999986303837333)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.2745157877604167), np.float64(53.74513034522373), np.float64(0.9998886361077329)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.17293802897135416), np.float64(55.75189855989742), np.float64(0.9999132524077415)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.36651611328125), np.float64(52.48987288424722), np.float64(0.999886363592564)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.04210535685221354), np.float64(61.88743008420387), np.float64(0.9999991751366671)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.04883448282877604), np.float64(61.2435376809228), np.float64(0.9999911004506815)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.09445953369140625), np.float64(58.37834563558513), np.float64(0.9999936893982525)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.030998865763346355), np.float64(63.21734557412078), np.float64(0.9999986669253245)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.029524803161621094), np.float64(63.428933499627725), np.float64(0.9999964732283045)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_60KB.txt', np.float64(0.017418861389160156), np.float64(65.720605975996), np.float64(0.999998630904981)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.322906494140625), np.float64(53.04003581440476), np.float64(0.999870865581109)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.033172607421875), np.float64(62.92300751741334), np.float64(0.9998992487625387)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.4127044677734375), np.float64(51.97441190466754), np.float64(0.9998673876016717)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.007719675699869792), np.float64(69.25481304666286), np.float64(0.9999994634546234)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.029638926188151043), np.float64(63.41217895670215), np.float64(0.9999906637228686)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.11066309611002605), np.float64(57.69077544215426), np.float64(0.99999250030856)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.02474816640218099), np.float64(64.19537333392825), np.float64(0.9999987641074134)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.02984301249186198), np.float64(63.382377001585375), np.float64(0.9999961844410764)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_70KB.txt', np.float64(0.018570582071940105), np.float64(65.44254844491086), np.float64(0.9999986082616243)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.2840525309244792), np.float64(53.59681697648441), np.float64(0.9998535622913155)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.23821512858072916), np.float64(54.36111021645195), np.float64(0.9998918294488609)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.3748423258463542), np.float64(52.392317369134645), np.float64(0.9998597599642393)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.058186848958333336), np.float64(60.48255521754267), np.float64(0.9999989447892966)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.05989710489908854), np.float64(60.35674529409085), np.float64(0.9999892501214743)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.09535598754882812), np.float64(58.33732392612533), np.float64(0.9999921775008448)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.034250895182291664), np.float64(62.78408434159202), np.float64(0.9999985185626663)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.030902862548828125), np.float64(63.230816506476124), np.float64(0.9999958594518553)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_80KB.txt', np.float64(0.01855786641438802), np.float64(65.44552316664026), np.float64(0.999998583714271)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.2793629964192708), np.float64(53.669114806187245), np.float64(0.9999436167038152)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.1271820068359375), np.float64(57.08654687327585), np.float64(0.9999584187989609)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.3730112711588542), np.float64(52.413584059274825), np.float64(0.9999384049254446)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.030820210774739582), np.float64(63.24244756401366), np.float64(0.9999994961325233)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.042629241943359375), np.float64(61.833727510155974), np.float64(0.9999959732101568)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.097015380859375), np.float64(58.262397679128554), np.float64(0.9999961309831104)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.028928120930989582), np.float64(63.51760136546103), np.float64(0.9999989766773755)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.029043197631835938), np.float64(63.50035930747203), np.float64(0.999997232510076)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_90KB.txt', np.float64(0.017095565795898438), np.float64(65.8019688206052), np.float64(0.9999987711684725)]
+9
+['..//datasets//rgb//house256.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.291351318359375), np.float64(53.486633732627254), np.float64(0.9998245177872551)]
+8
+['..//datasets//rgb//tree256.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.2780354817708333), np.float64(53.689801384966415), np.float64(0.9998548462130096)]
+10
+['..//datasets//rgb//candy256.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.3814748128255208), np.float64(52.316144922650835), np.float64(0.9998375103688982)]
+8
+['..//datasets//rgb//baboon512.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.06763585408528645), np.float64(59.829033823305274), np.float64(0.9999987449447296)]
+11
+['..//datasets//rgb//airplane512.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.06626383463541667), np.float64(59.91803796318436), np.float64(0.9999859663964733)]
+7
+['..//datasets//rgb//peppers512.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.0963427225748698), np.float64(58.29261445871688), np.float64(0.9999902133282669)]
+8
+['..//datasets//rgb//abstract1024.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.03618176778157552), np.float64(62.54590578912718), np.float64(0.9999984125296549)]
+6
+['..//datasets//rgb//irish1024.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.03183269500732422), np.float64(63.10206952618786), np.float64(0.9999951523129553)]
+6
+['..//datasets//rgb//nature1024.tiff', '..//datasets//text//lorem_100KB.txt', np.float64(0.019350687662760418), np.float64(65.263839577747), np.float64(0.9999984474960585)]
